@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>育儿认知测评</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAF0E6;
+  --bg2: #FDF7F0;
+  --card: #FFFFFF;
+  --green: #7BAE7F;
+  --green-dark: #4A7C59;
+  --green-light: #E8F5E1;
+  --yellow: #F5C842;
+  --yellow-light: #FFFBEA;
+  --coral: #E07B6A;
+  --coral-light: #FDECEA;
+  --cloud: #FDFAF5;
+  --dark: #3D3529;
+  --mid: #7A6E5F;
+  --gray: #B0A898;
+  --border: #EDE5D8;
+  --shadow: 0 2px 16px rgba(61,53,41,0.07);
+  --shadow-lg: 0 8px 32px rgba(61,53,41,0.12);
+  --r: 20px;
+  --r-sm: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  min-height: 100vh;
+  max-width: 430px;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+.screen { display: none; min-height: 100vh; flex-direction: column; }
+.screen.active { display: flex; }
+
+/* ── WELCOME ── */
+#screen-welcome {
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-hills {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 45%;
+  pointer-events: none;
+}
+
+.welcome-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+.welcome-top {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 28px 24px;
+  text-align: center;
+}
+
+.welcome-icon {
+  width: 88px; height: 88px;
+  background: var(--green-light);
+  border-radius: 28px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 44px;
+  margin-bottom: 24px;
+  animation: float 4s ease-in-out infinite;
+  box-shadow: 0 4px 20px rgba(123,174,127,0.25);
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+.welcome-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--green-dark);
+  margin-bottom: 10px;
+}
+
+.welcome-desc {
+  font-size: 14px;
+  color: var(--mid);
+  line-height: 1.8;
+  max-width: 300px;
+}
+
+.welcome-pills {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 12px;
+  color: var(--mid);
+  box-shadow: var(--shadow);
+}
+
+.welcome-bottom {
+  background: var(--card);
+  border-radius: 28px 28px 0 0;
+  padding: 24px 24px 40px;
+  box-shadow: 0 -4px 24px rgba(61,53,41,0.06);
+}
+
+.notice {
+  background: var(--green-light);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  display: flex;
+  gap: 10px;
+}
+
+.notice-icon { font-size: 15px; flex-shrink: 0; }
+.notice-text { font-size: 12px; color: var(--green-dark); line-height: 1.65; }
+.notice-text strong { font-weight: 500; }
+
+.btn-primary {
+  width: 100%;
+  padding: 16px;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(123,174,127,0.4);
+}
+
+.btn-primary:active { transform: scale(0.98); opacity: 0.9; }
+
+/* ── IDENTITY ── */
+#screen-identity { background: var(--bg); }
+
+.id-hero {
+  background: linear-gradient(160deg, var(--green-dark), var(--green));
+  padding: 52px 24px 28px;
+  border-radius: 0 0 28px 28px;
+  text-align: center;
+}
+
+.id-hero h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.id-hero p { font-size: 13px; color: rgba(255,255,255,0.65); }
+
+.id-body { padding: 24px 20px; flex: 1; }
+
+.section-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gray);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.id-cards { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+
+.id-card {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: var(--r);
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: var(--shadow);
+}
+
+.id-card.sel { border-color: var(--green); background: var(--green-light); }
+.id-card:active { transform: scale(0.98); }
+
+.id-icon {
+  width: 46px; height: 46px;
+  border-radius: 14px;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.id-card.sel .id-icon { background: rgba(123,174,127,0.2); }
+.id-info strong { display: block; font-size: 14px; font-weight: 500; color: var(--dark); margin-bottom: 2px; }
+.id-info span { font-size: 12px; color: var(--gray); }
+
+.age-wrap { display: none; margin-bottom: 24px; }
+.age-wrap.show { display: block; }
+
+.age-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+.age-btn {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 12px;
+  text-align: center;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 13px;
+  color: var(--mid);
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+}
+
+.age-btn.sel { border-color: var(--green); background: var(--green-light); color: var(--green-dark); font-weight: 500; }
+
+.btn-go {
+  width: 100%;
+  padding: 16px;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(123,174,127,0.4);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.btn-go.ready { opacity: 1; pointer-events: auto; }
+.btn-go:active { transform: scale(0.98); }
+
+/* ── QUIZ ── */
+#screen-quiz { background: var(--bg); }
+
+.quiz-bar {
+  background: var(--card);
+  padding: 50px 20px 14px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.quiz-bar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.quiz-brand {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green-dark);
+}
+
+.quiz-num { font-size: 13px; color: var(--gray); }
+
+.prog { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.prog-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), var(--yellow));
+  border-radius: 3px;
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.quiz-body { flex: 1; padding: 20px 20px 120px; overflow-y: auto; }
+
+.q-anim { animation: slideUp 0.3s ease both; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.q-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+
+.q-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 11px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.q-badge.k { background: var(--green-light); color: var(--green-dark); }
+.q-badge.a { background: var(--yellow-light); color: #7A5C00; }
+
+.q-tag {
+  font-size: 11px;
+  color: var(--gray);
+  background: var(--border);
+  padding: 3px 9px;
+  border-radius: 8px;
+}
+
+.q-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(16px, 4.2vw, 19px);
+  font-weight: 600;
+  color: var(--dark);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.opts { display: flex; flex-direction: column; gap: 9px; margin-bottom: 14px; }
+
+.opt {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  cursor: pointer;
+  transition: all 0.18s;
+  width: 100%;
+  text-align: left;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px;
+  color: var(--dark);
+  line-height: 1.5;
+  box-shadow: var(--shadow);
+}
+
+.opt:hover:not(:disabled) { border-color: var(--green); background: var(--green-light); }
+.opt:active:not(:disabled) { transform: scale(0.99); }
+
+.opt-ltr {
+  width: 26px; height: 26px;
+  border-radius: 8px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600; color: var(--gray);
+  flex-shrink: 0; margin-top: 1px;
+  transition: all 0.18s;
+}
+
+.opt:hover:not(:disabled) .opt-ltr { background: var(--green); border-color: var(--green); color: #fff; }
+.opt.correct { border-color: var(--green); background: var(--green-light); }
+.opt.correct .opt-ltr { background: var(--green); border-color: var(--green); color: #fff; }
+.opt.wrong { border-color: var(--coral); background: var(--coral-light); }
+.opt.wrong .opt-ltr { background: var(--coral); border-color: var(--coral); color: #fff; }
+.opt.dim { opacity: 0.35; }
+.opt:disabled { cursor: default; }
+
+.aw-opts { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+
+.aw-opt {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 13px 16px;
+  cursor: pointer;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 13px;
+  color: var(--mid);
+  text-align: left;
+  transition: all 0.18s;
+  width: 100%;
+  box-shadow: var(--shadow);
+}
+
+.aw-opt:hover:not(:disabled) { border-color: var(--yellow); background: var(--yellow-light); color: #7A5C00; }
+.aw-opt.picked { border-color: var(--yellow); background: var(--yellow-light); color: #7A5C00; font-weight: 500; }
+.aw-opt:disabled { cursor: default; }
+
+/* Result */
+.result-box {
+  display: none;
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-bottom: 12px;
+  animation: slideUp 0.25s ease both;
+  box-shadow: var(--shadow);
+}
+
+.result-box.show { display: block; }
+
+.result-top {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.result-top.ok { background: #DCFCE7; color: #166534; }
+.result-top.err { background: #FEF3C7; color: #92400E; }
+.result-top.aw { background: var(--green-light); color: var(--green-dark); }
+
+.result-dot {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; flex-shrink: 0;
+}
+
+.ok .result-dot { background: var(--green); color: #fff; }
+.err .result-dot { background: var(--yellow); color: #fff; }
+.aw .result-dot { background: var(--green); color: #fff; }
+
+.result-body { padding: 16px; background: var(--card); }
+
+.result-exp {
+  font-size: 13px;
+  color: var(--dark);
+  line-height: 1.82;
+  margin-bottom: 14px;
+}
+
+.result-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.act-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 11px;
+  color: var(--mid);
+  cursor: pointer;
+  transition: all 0.18s;
+  text-decoration: none;
+}
+
+.act-btn:hover { border-color: var(--green); color: var(--green-dark); }
+.act-btn.saved { border-color: var(--yellow); color: #7A5C00; background: var(--yellow-light); }
+.act-btn.copied { border-color: var(--green); color: var(--green-dark); background: var(--green-light); }
+
+.quiz-footer {
+  position: fixed;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%; max-width: 430px;
+  padding: 12px 20px 32px;
+  background: linear-gradient(to top, var(--bg) 65%, transparent);
+}
+
+.btn-next {
+  width: 100%;
+  padding: 15px;
+  background: var(--green-dark);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: none;
+  box-shadow: 0 4px 18px rgba(74,124,89,0.35);
+}
+
+.btn-next.show { display: block; }
+.btn-next:active { transform: scale(0.98); }
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 88px; left: 50%; transform: translateX(-50%);
+  background: var(--dark);
+  color: #fff;
+  padding: 9px 18px;
+  border-radius: 20px;
+  font-size: 12px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s;
+  z-index: 999;
+  white-space: nowrap;
+}
+
+.toast.on { opacity: 1; }
+
+/* ── CONSENT ── */
+#screen-consent {
+  background: var(--bg);
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+}
+
+.consent-box {
+  width: 100%;
+  background: var(--card);
+  border-radius: var(--r);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.4s ease both;
+}
+
+.consent-emoji {
+  width: 56px; height: 56px;
+  background: var(--green-light);
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  margin: 0 auto 18px;
+}
+
+.consent-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 10px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.consent-body {
+  font-size: 13px;
+  color: var(--mid);
+  line-height: 1.8;
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+.consent-body strong { color: var(--dark); font-weight: 500; }
+
+.btn-yes {
+  width: 100%;
+  padding: 14px;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(123,174,127,0.35);
+}
+
+.btn-yes:active { transform: scale(0.98); }
+
+.btn-no {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  color: var(--gray);
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.consent-note { font-size: 11px; color: var(--gray); text-align: center; margin-top: 12px; }
+
+/* ── REPORT ── */
+#screen-report { background: var(--bg); overflow-y: auto; }
+
+.report-hero {
+  background: linear-gradient(160deg, var(--green-dark) 0%, var(--green) 70%, #A8D5AC 100%);
+  padding: 48px 24px 32px;
+  border-radius: 0 0 32px 32px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.report-hero::before {
+  content: '';
+  position: absolute;
+  top: -50px; right: -50px;
+  width: 180px; height: 180px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 50%;
+}
+
+.report-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30px; left: -30px;
+  width: 120px; height: 120px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+}
+
+.hero-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 4px;
+}
+
+.hero-grade {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+/* Radar chart */
+.radar-wrap {
+  position: relative;
+  width: 220px; height: 220px;
+  margin: 0 auto 16px;
+  z-index: 1;
+}
+
+.hero-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.65;
+  max-width: 300px;
+  margin: 0 auto 16px;
+}
+
+.hero-pills { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+
+.hero-pill {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.9);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.hero-pill:hover { background: rgba(255,255,255,0.25); }
+
+.report-body { padding: 20px 20px 60px; }
+
+.r-section { margin-bottom: 24px; }
+
+.r-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gray);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.r-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* Domain cards */
+.domain-grid { display: flex; flex-direction: column; gap: 10px; }
+
+.domain-card {
+  background: var(--card);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+
+.dc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.dc-name { font-size: 13px; font-weight: 500; color: var(--dark); display: flex; align-items: center; gap: 6px; }
+.dc-grade { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 8px; }
+.grade-good { background: var(--green-light); color: var(--green-dark); }
+.grade-mid { background: var(--yellow-light); color: #7A5C00; }
+.grade-low { background: var(--coral-light); color: #9B3A2D; }
+.dc-score { font-size: 12px; color: var(--gray); }
+
+.dc-track { height: 7px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.dc-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1.2s cubic-bezier(0.4,0,0.2,1) 0.5s;
+}
+.fill-good { background: linear-gradient(90deg, var(--green), #A8D5AC); }
+.fill-mid { background: linear-gradient(90deg, var(--yellow), #F9DC76); }
+.fill-low { background: linear-gradient(90deg, var(--coral), #EBA99E); }
+
+/* Question review */
+.review-list { display: flex; flex-direction: column; gap: 10px; }
+
+.review-item {
+  background: var(--card);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.review-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+}
+
+.review-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot-ok { background: var(--green); }
+.dot-err { background: var(--coral); }
+.dot-aw { background: var(--yellow); }
+
+.review-q { font-size: 13px; color: var(--dark); line-height: 1.5; flex: 1; }
+
+.review-badge {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.rb-ok { background: var(--green-light); color: var(--green-dark); }
+.rb-err { background: var(--coral-light); color: #9B3A2D; }
+.rb-aw { background: var(--yellow-light); color: #7A5C00; }
+
+.review-detail {
+  padding: 0 14px 14px;
+  border-top: 1px solid var(--border);
+}
+
+.review-exp { font-size: 12px; color: var(--mid); line-height: 1.7; margin: 10px 0; }
+
+.review-actions { display: flex; gap: 7px; }
+
+/* Mirror */
+.mirror-card {
+  background: var(--card);
+  border-radius: var(--r-sm);
+  padding: 18px 18px 16px;
+  border-left: 4px solid var(--green);
+  box-shadow: var(--shadow);
+}
+
+.mirror-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  color: var(--dark);
+  line-height: 1.75;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.mirror-note { font-size: 11px; color: var(--gray); }
+
+/* Specialty */
+.spec-cards { display: flex; flex-direction: column; gap: 10px; }
+
+.spec-card {
+  background: var(--card);
+  border-radius: var(--r-sm);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+  text-decoration: none;
+}
+
+.spec-card.open { border-color: var(--green); }
+.spec-card.open:hover { background: var(--green-light); }
+.spec-card:active { transform: scale(0.98); }
+
+.spec-card.coming { opacity: 0.55; cursor: default; }
+
+.spec-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.spec-icon.g { background: var(--green-light); }
+.spec-icon.y { background: var(--yellow-light); }
+.spec-icon.c { background: var(--coral-light); }
+
+.spec-info { flex: 1; }
+.spec-info strong { display: block; font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 2px; }
+.spec-info span { font-size: 12px; color: var(--gray); }
+
+.spec-badge {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.sb-open { background: var(--green-light); color: var(--green-dark); }
+.sb-soon { background: var(--border); color: var(--gray); }
+
+/* Saved */
+.saved-empty {
+  background: var(--card);
+  border-radius: var(--r-sm);
+  padding: 20px;
+  text-align: center;
+  color: var(--gray);
+  font-size: 13px;
+  box-shadow: var(--shadow);
+}
+
+.saved-list { display: flex; flex-direction: column; gap: 10px; }
+
+.saved-item {
+  background: var(--card);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+
+.saved-q { font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 6px; }
+.saved-exp { font-size: 12px; color: var(--mid); line-height: 1.65; }
+
+/* Share */
+.share-card {
+  background: linear-gradient(135deg, var(--green-dark), var(--green));
+  border-radius: var(--r);
+  padding: 24px 20px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+
+.share-card h3 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.share-card p { font-size: 12px; color: rgba(255,255,255,0.65); margin-bottom: 18px; line-height: 1.6; }
+
+.share-row { display: flex; gap: 10px; }
+
+.btn-sp {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.btn-sp:active { transform: scale(0.97); }
+.btn-sp.white { background: #fff; color: var(--green-dark); }
+.btn-sp.ghost { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+
+.btn-card {
+  width: 100%;
+  padding: 14px;
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px;
+  color: var(--green-dark);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 10px;
+  box-shadow: var(--shadow);
+}
+
+.btn-card:hover { border-color: var(--green); }
+
+.btn-retry {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px;
+  color: var(--mid);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 10px;
+}
+
+.btn-retry:hover { border-color: var(--green); color: var(--green-dark); }
+
+/* ── SHARE CARD SCREEN ── */
+#screen-sharecard {
+  background: var(--bg);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  flex-direction: column;
+}
+
+.sharecard-wrap {
+  width: 100%;
+  max-width: 340px;
+  animation: slideUp 0.4s ease both;
+}
+
+.sharecard {
+  background: linear-gradient(160deg, var(--green-dark) 0%, var(--green) 60%, #A8D5AC 100%);
+  border-radius: 24px;
+  padding: 28px 24px 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.sharecard::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 160px; height: 160px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+}
+
+.sharecard-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.sharecard-radar {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 16px;
+}
+
+.sharecard-score {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.sharecard-grade {
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+.sharecard-mirror {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.65;
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+  max-width: 260px;
+  margin-bottom: 16px;
+}
+
+.sharecard-watermark {
+  font-size: 10px;
+  color: rgba(255,255,255,0.45);
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.05em;
+}
+
+.sharecard-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-dl {
+  width: 100%;
+  padding: 14px;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(123,174,127,0.4);
+}
+
+.btn-back {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px;
+  color: var(--mid);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* ── SPECIALTY SCREEN ── */
+#screen-spec {
+  background: var(--bg);
+  flex-direction: column;
+}
+
+.spec-header {
+  background: linear-gradient(160deg, var(--green-dark), var(--green));
+  padding: 52px 24px 24px;
+  border-radius: 0 0 24px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.spec-back {
+  width: 36px; height: 36px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  flex-shrink: 0;
+  color: #fff;
+  border: none;
+}
+
+.spec-header-info h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.spec-header-info p { font-size: 12px; color: rgba(255,255,255,0.65); }
+
+.spec-body { flex: 1; padding: 20px 20px 120px; overflow-y: auto; }
+</style>
+</head>
+<body>
+
+<!-- WELCOME -->
+<div id="screen-welcome" class="screen active">
+  <div class="welcome-content">
+    <div class="welcome-top">
+      <div class="welcome-icon">🌱</div>
+      <h1 class="welcome-title">育儿认知测评</h1>
+      <p class="welcome-desc">育儿认知测评是一个公益项目。从备孕到孩子3岁，有些关键的知识和决策，很多人没有提前了解过。做几道题，看看你已经知道哪些，还有哪些值得深入了解。</p>
+      <div class="welcome-pills">
+        <span class="pill">📚 基于学术研究</span>
+        <span class="pill">🏠 覆盖家庭全员</span>
+        <span class="pill">🎁 即时生成报告</span>
+      </div>
+    </div>
+    <div class="welcome-bottom">
+      <div class="notice">
+        <span class="notice-icon">🔒</span>
+        <span class="notice-text"><strong>关于你的数据：</strong>本项目为公益研究，匿名数据将用于了解中国家庭育儿认知现状。你可以在答题结束后选择是否授权用于研究。</span>
+      </div>
+      <button class="btn-primary" onclick="go('identity')">开始测评 →</button>
+    </div>
+  </div>
+  <!-- Hills SVG -->
+  <svg class="welcome-hills" viewBox="0 0 430 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="215" cy="280" rx="340" ry="180" fill="#7BAE7F" opacity="0.18"/>
+    <ellipse cx="100" cy="300" rx="220" ry="160" fill="#4A7C59" opacity="0.12"/>
+    <ellipse cx="350" cy="310" rx="200" ry="150" fill="#A8D5AC" opacity="0.15"/>
+  </svg>
+</div>
+
+<!-- IDENTITY -->
+<div id="screen-identity" class="screen">
+  <div class="id-hero">
+    <h2>先告诉我你的情况</h2>
+    <p>题目会根据你的情况来调整</p>
+  </div>
+  <div class="id-body">
+    <div class="section-label">你是</div>
+    <div class="id-cards">
+      <div class="id-card" onclick="pickId('parent',this)">
+        <div class="id-icon">👶</div>
+        <div class="id-info"><strong>妈妈或爸爸</strong><span>已有孩子，正在育儿中</span></div>
+      </div>
+      <div class="id-card" onclick="pickId('expecting',this)">
+        <div class="id-icon">🤰</div>
+        <div class="id-info"><strong>准妈妈或准爸爸</strong><span>正在备孕或孕期中</span></div>
+      </div>
+      <div class="id-card" onclick="pickId('grandparent',this)">
+        <div class="id-icon">👴</div>
+        <div class="id-info"><strong>祖辈</strong><span>爷爷奶奶或外公外婆</span></div>
+      </div>
+    </div>
+    <div class="age-wrap" id="age-wrap">
+      <div class="section-label">孩子多大了</div>
+      <div class="age-grid">
+        <button class="age-btn" onclick="pickAge('0-6m',this)">0—6个月</button>
+        <button class="age-btn" onclick="pickAge('6-12m',this)">6—12个月</button>
+        <button class="age-btn" onclick="pickAge('1-3y',this)">1—3岁</button>
+        <button class="age-btn" onclick="pickAge('3y+',this)">3岁以上</button>
+      </div>
+    </div>
+    <button class="btn-go" id="btn-go" onclick="startQuiz()">进入测评 →</button>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div id="screen-quiz" class="screen">
+  <div class="quiz-bar">
+    <div class="quiz-bar-top">
+      <span class="quiz-brand">育儿认知测评</span>
+      <span class="quiz-num" id="q-num">1 / 20</span>
+    </div>
+    <div class="prog"><div class="prog-bar" id="prog-bar" style="width:0%"></div></div>
+  </div>
+  <div class="quiz-body" id="quiz-body">
+    <div id="q-root"></div>
+  </div>
+  <div class="quiz-footer">
+    <button class="btn-next" id="btn-next" onclick="nextQ()">下一题 →</button>
+  </div>
+</div>
+
+<!-- CONSENT -->
+<div id="screen-consent" class="screen">
+  <div class="consent-box">
+    <div class="consent-emoji">📋</div>
+    <div class="consent-title">在查看报告之前，有件事想告诉你</div>
+    <div class="consent-body">
+      你刚才的答题数据，已经帮助我们了解了一个真实家庭的育儿认知状况。<br><br>
+      如果你愿意，这份<strong>完全匿名</strong>的数据可以用于育儿认知研究，未来帮助更多家庭少走弯路。<br><br>
+      不管你的选择是什么，都能看到<strong>完整的个人报告</strong>。
+    </div>
+    <button class="btn-yes" onclick="consent(true)">同意用于研究，查看报告</button>
+    <button class="btn-no" onclick="consent(false)">不同意，直接查看报告</button>
+    <div class="consent-note">数据匿名处理，不包含任何个人身份信息</div>
+  </div>
+</div>
+
+<!-- REPORT -->
+<div id="screen-report" class="screen">
+  <div class="report-hero">
+    <div class="hero-title">你的育儿认知报告</div>
+    <div class="hero-grade" id="r-grade">—</div>
+    <div class="radar-wrap">
+      <svg id="radar-svg" width="220" height="220" viewBox="0 0 220 220"></svg>
+    </div>
+    <div class="hero-desc" id="r-desc">完成了基础测评</div>
+    <div class="hero-pills">
+      <span class="hero-pill" onclick="scrollTo('review')">📝 逐题回顾</span>
+      <span class="hero-pill" onclick="scrollTo('mirror')">🪞 一句话镜子</span>
+      <span class="hero-pill" onclick="scrollTo('spec')">🎯 专项测评</span>
+      <span class="hero-pill" onclick="scrollTo('saved')">⭐ 我的收藏</span>
+    </div>
+  </div>
+
+  <div class="report-body">
+    <div class="r-section">
+      <div class="r-label">各领域掌握情况</div>
+      <div class="domain-grid" id="domain-grid"></div>
+    </div>
+
+    <div class="r-section" id="review">
+      <div class="r-label">逐题回顾</div>
+      <div class="review-list" id="review-list"></div>
+    </div>
+
+    <div class="r-section" id="mirror">
+      <div class="r-label">一句话镜子</div>
+      <div class="mirror-card">
+        <div class="mirror-text" id="mirror-text">—</div>
+        <div class="mirror-note">根据你的觉察型题目答案生成，不评判，只描述</div>
+      </div>
+    </div>
+
+    <div class="r-section" id="spec">
+      <div class="r-label">专项深入测评</div>
+      <div class="spec-cards" id="spec-cards"></div>
+    </div>
+
+    <div class="r-section" id="saved">
+      <div class="r-label">我的收藏</div>
+      <div id="saved-wrap"></div>
+    </div>
+
+    <div class="r-section">
+      <div class="r-label">分享</div>
+      <div class="share-card">
+        <h3>关于孩子的成长，有件事想让你也了解一下</h3>
+        <p>把这份测评发给伴侣或家人，一起建立共同的育儿认知</p>
+        <div class="share-row">
+          <button class="btn-sp white" onclick="doShare('partner')">分享给伴侣</button>
+          <button class="btn-sp ghost" onclick="doShare('family')">分享给家人</button>
+        </div>
+      </div>
+      <button class="btn-card" onclick="go('sharecard')">📸 生成可分享的报告卡片</button>
+      <button class="btn-retry" onclick="restart()">重新测评 ↺</button>
+    </div>
+  </div>
+</div>
+
+<!-- SHARE CARD -->
+<div id="screen-sharecard" class="screen">
+  <div class="sharecard-wrap">
+    <div class="sharecard" id="the-card">
+      <div class="sharecard-title">育儿认知测评 · 公益项目</div>
+      <div class="sharecard-radar">
+        <svg id="card-radar" width="140" height="140" viewBox="0 0 140 140"></svg>
+      </div>
+      <div class="sharecard-score" id="card-score">—</div>
+      <div class="sharecard-grade" id="card-grade">—</div>
+      <div class="sharecard-mirror" id="card-mirror">—</div>
+      <div class="sharecard-watermark">育儿认知测评 · 公益项目</div>
+    </div>
+    <div class="sharecard-actions">
+      <div style="font-size:12px;color:var(--gray);text-align:center;margin-bottom:4px">长按卡片截图保存，即可分享</div>
+      <button class="btn-dl" onclick="doShare('card')">↗ 分享这张卡片</button>
+      <button class="btn-back" onclick="go('report')">← 返回报告</button>
+    </div>
+  </div>
+</div>
+
+<!-- SPECIALTY -->
+<div id="screen-spec" class="screen">
+  <div class="spec-header">
+    <button class="spec-back" onclick="go('report')">←</button>
+    <div class="spec-header-info">
+      <h2 id="spec-title">专项测评</h2>
+      <p id="spec-subtitle">深入了解这个领域</p>
+    </div>
+  </div>
+  <div class="spec-body" id="spec-body">
+    <div id="spec-q-root"></div>
+  </div>
+  <div class="quiz-footer">
+    <button class="btn-next" id="spec-btn-next" onclick="nextSpecQ()">下一题 →</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════
+// QUESTIONS DATA
+// ══════════════════
+const QS = [
+  {id:'Q001',domain:'哺乳',type:'k',text:'新生儿出生后，应该什么时候开始哺乳？',opts:['出生后30分钟到1小时内，即使还没有奶也要让婴儿吸吮','等母亲休息4-6小时恢复体力后再开始，这样奶水质量更好','等婴儿第一次表现出饥饿信号（哭闹）时再喂，顺应婴儿需求','出生后24小时内开始就可以，具体时间影响不大'],correct:0,exp:'婴儿吸吮乳头会直接刺激母亲脑垂体分泌催乳素——吸吮越早、越频繁，奶量建立越顺利。等到涨奶才开始喂，错过的是供需信号建立的黄金窗口，反而更容易发展成乳腺炎。初乳虽然量少，但每毫升含有的免疫球蛋白浓度是成熟母乳的10倍以上，对新生儿的免疫保护无可替代。',src:{label:'WHO《母乳喂养技术指导》2022',url:'https://www.who.int/publications/i/item/9789240045156'}},
+  {id:'Q002',domain:'哺乳',type:'k',text:'婴儿正确含乳时，嘴巴应该怎样？',opts:['含住乳头即可，婴儿会本能地调整到最舒适的位置','嘴巴张大超过120度，含住乳头和大部分乳晕，下唇向外翻','听到婴儿吸吮声说明含乳正确，安静吸吮反而需要调整','婴儿鼻子紧贴乳房才是正确含乳，保证气道畅通'],correct:1,exp:'乳头皲裂几乎只有一个原因——婴儿没有含住足够多的乳晕，导致吸吮时反复摩擦乳头皮肤。正确含乳时，婴儿嘴巴大张，含住乳头和大部分乳晕，下唇外翻，鼻尖轻触乳房（不是紧贴）。判断方式：吸奶时应该听到吞咽声，而不是吸吮声——吸吮声说明婴儿在费力抽吸乳头，没有有效含乳。',src:{label:'国际泌乳顾问协会（IBCLC）临床指南',url:'https://www.ilca.org/why-ibclc/ibclc-resources'}},
+  {id:'Q003',domain:'哺乳',type:'k',text:'以下哪个是判断母乳是否充足的准确方法？',opts:['观察婴儿吃奶后是否满足，哭闹说明没吃饱需要补奶粉','用吸奶器测量每次吸出的奶量，低于100ml说明奶不够','观察每天湿尿布数量，6片以上且体重正常增长说明奶够','乳房有涨奶感说明奶够，摸起来软说明奶水不足'],correct:2,exp:'母乳分泌的逻辑是「移出多少，产多少」——婴儿吸吮越频繁，乳腺接收到的需求信号越强，产量越高。乳房软不软、奶水稀不稀，都不是判断奶量的依据。真正可靠的指标只有两个：每天湿尿布6片以上；每月体重增长500-1000克。吸奶器测出的量远低于婴儿实际能吸出的量，用来判断奶量是最常见的误判来源之一。',src:{label:'中国营养学会《婴幼儿喂养指南》2022',url:'https://www.cnsoc.org/'}},
+  {id:'Q004',domain:'哺乳',type:'k',text:'哺乳期母亲在饮食上需要注意什么？',opts:['要完全戒辣戒生冷，母亲吃了刺激性食物会直接影响母乳成分','要避免吃鸡蛋和牛奶，这两种最容易让宝宝通过母乳过敏','要多喝猪蹄汤鲫鱼汤，高蛋白汤水是促进泌乳最有效的方法','均衡饮食即可，无需严格忌口，母亲饮食对母乳成分影响极小'],correct:3,exp:'母亲吃下去的食物，经过消化吸收后，极少量的成分会进入血液，再经过乳腺过滤才进入母乳。美国妇产科医师学会（ACOG）明确：哺乳期母亲无需特殊忌口，均衡饮食即可。猪蹄汤鲫鱼汤的催奶效果没有临床依据，高脂肪汤水反而可能堵塞乳腺导管。如果婴儿对某种食物敏感，通常会在母亲进食后12-24小时内出现症状，可以针对性回避，而不是全面忌口。',src:{label:'美国妇产科医师学会（ACOG）哺乳期营养指南',url:'https://www.acog.org/womens-health/faqs/breastfeeding-your-baby'}},
+  {id:'Q007',domain:'哺乳',type:'k',text:'关于「夜奶」，以下哪个说法是正确的？',opts:['夜奶会破坏婴儿的睡眠节律，越早建立不夜奶的习惯对发育越好','夜奶没问题，但每次控制在10分钟以内，避免婴儿养成长时间吃奶的习惯','6个月内婴儿胃容量小，夜奶是正常生理需求，不应强行中断','夜奶对婴儿有益，但会严重影响母亲休息，可以用奶瓶夜间替代亲喂'],correct:2,exp:'6个月内婴儿的胃容量只有60-90ml，无法储存足够维持整夜的热量。夜奶不是习惯问题，是生理需求。强行断夜奶的婴儿并不是「学会了睡整觉」，而是在饥饿中精疲力竭后睡着。夜间哺乳时，母亲体内催乳素的分泌量是白天的2-3倍——夜奶恰恰是维持奶量最重要的时间段，断掉夜奶往往是奶量骤降的直接原因。',src:{label:'美国儿科学会（AAP）母乳喂养政策声明2022',url:'https://publications.aap.org/pediatrics/article/150/1/e2022057989/188347'}},
+  {id:'Q010',domain:'哺乳',type:'a',text:'在过去一周，当哺乳遇到困难时（涨奶、疼痛、奶量不足），主要由谁来帮助解决？',opts:['主要靠自己摸索解决','伴侣会主动帮忙想办法','家里长辈提供经验建议','请了专业的泌乳顾问','还没遇到过这种情况'],exp:'泌乳顾问的临床观察显示，母亲放弃母乳喂养最常见的原因不是奶量不足，而是在遇到困难时得不到及时支持。伴侣懂得哺乳知识，能在关键时刻帮忙调整含乳姿势、拍背安抚婴儿、或者只是递一杯水——这些具体的支持，直接决定了母亲能否坚持下去。父亲不需要亲自哺乳，但需要真正参与其中。',src:{label:'国际泌乳顾问协会（IBCLC）家庭支持研究',url:'https://www.ilca.org/'}},
+  {id:'Q011',domain:'孕期决策',type:'k',text:'第一次怀孕，什么时候去医院建档最合适？',opts:['孕6-8周确认怀孕后尽快，最晚不超过孕12周','孕3个月（12周）后再去，太早去检查项目也不多','等第一次感受到胎动再去，说明胎儿已经稳定了','出现明显孕吐等妊娠反应后再去，这时候才需要医疗介入'],correct:0,exp:'孕12周前是两个不可错过的窗口。第一，宫外孕、葡萄胎、胚胎停育在孕早期没有明显症状，只能通过超声发现，延误发现可能危及母亲生命。第二，NT检查只能在孕11周到13周6天这个极窄的窗口完成，错过后无法补做，只能等到孕中期做检出率更低的唐筛。「等稳了再去」的想法本身就是误区——孕早期恰恰是最需要医疗监测的时期。',src:{label:'中华医学会《孕前和孕期保健指南》2018',url:'https://www.cma.org.cn/'}},
+  {id:'Q012',domain:'孕期决策',type:'k',text:'关于NT检查，以下哪个说法是正确的？',opts:['NT检查结果正常说明胎儿染色体没有问题，可以不用再做无创DNA','NT检查是早期筛查胎儿染色体异常的超声指标，孕11-13周进行','NT检查主要是看胎儿心脏发育，和染色体关系不大','高龄产妇（35岁以上）才需要做NT检查，年轻孕妇可以跳过'],correct:1,exp:'NT是胎儿颈部皮下积液的厚度，唐氏综合征胎儿由于淋巴系统发育异常，这个数值会偏高。孕11-13周是检测NT的唯一窗口——太早胎儿太小看不清，太晚积液会被吸收。NT结果正常只是降低了风险，不代表没问题，仍需结合血清学筛查综合评估。35岁以下同样有生出唐氏儿的可能，年龄不是唯一风险因素。',src:{label:'中华医学会围产医学分会产前诊断学组指南',url:'https://www.cma.org.cn/'}},
+  {id:'Q014',domain:'孕期决策',type:'k',text:'孕期检查发现子宫肌瘤，应该怎么处理？',opts:['子宫肌瘤在孕期会受激素影响变大，应该尽早手术切除','有子宫肌瘤就需要提前剖腹产，避免顺产时出血风险','告知产检医生，由医生评估肌瘤大小位置，制定个性化方案','小的肌瘤不影响生产，只有超过5厘米才需要告诉医生'],correct:2,exp:'子宫肌瘤对孕期的影响完全取决于它长在哪里、有多大。长在宫腔内的黏膜下肌瘤风险最高，可能影响胎盘位置；长在子宫外壁的浆膜下肌瘤影响通常很小。孕期激素环境会让肌瘤短暂增大，但手术风险极高，孕期几乎不考虑手术。是否需要剖腹产，取决于肌瘤是否阻塞产道，而不是「有肌瘤就剖」。让医生全面了解情况，选择有处理经验的医院，是最重要的两件事。',src:{label:'中华医学会《子宫肌瘤与妊娠管理专家共识》',url:'https://www.cma.org.cn/'}},
+  {id:'Q016',domain:'孕期决策',type:'k',text:'关于顺产和剖腹产，以下哪个说法符合科学？',opts:['剖腹产可以保护盆底肌，避免顺产造成的漏尿等后遗症','顺产经过产道挤压，有助于婴儿肺部发育和肠道菌群建立','无痛分娩会影响产程进展，对婴儿也有麻醉药物的影响','高龄产妇体力较差，应该优先考虑剖腹产减少生产风险'],correct:1,exp:'WHO明确指出，剖腹产率超过15%就意味着不必要的手术在增加。关于盆底——剖腹产确实减少了产道撕裂，但孕期本身（而非分娩方式）已经对盆底造成了大部分压力。无痛分娩的硬膜外麻醉只作用于局部，不影响产程进展，也不会进入胎儿血液。顺产婴儿经产道挤压，肺部液体排出更充分，在通过产道时接触母亲的阴道菌群，是肠道菌群健康建立的重要来源。',src:{label:'WHO《剖宫产率声明》2015',url:'https://www.who.int/publications/i/item/WHO-RHR-15.02'}},
+  {id:'Q026',domain:'依恋发展',type:'k',text:'婴儿哭了，照料者立刻回应，会不会「惯坏」孩子？',opts:['会，频繁回应会让孩子养成依赖，不利于培养独立性','要看情况，确认不是饿了或不舒服再抱，避免无原则回应','不会，6个月内及时回应是建立安全依恋的基础，反而让孩子更独立','白天可以及时回应，晚上要适当延迟，帮助建立昼夜节律'],correct:2,exp:'「惯坏」的前提是孩子能理解「哭→大人来→我达到目的」这个因果逻辑。6个月内的婴儿前额叶皮层尚未发育，根本不具备这种能力。鲍尔比（John Bowlby）的依恋理论和Ainsworth的追踪研究共同证明：照料者对婴儿哭声的稳定回应，是安全依恋形成的核心条件。安全依恋的孩子在18个月后表现出更强的探索欲和独立性——因为他们的神经系统已经学会了「世界是安全的，我不需要一直哭着求救」。',src:{label:'Bowlby《依恋与失落》· Ainsworth陌生情境实验（1978）',url:'https://www.douban.com/book/subject/25982268/'}},
+  {id:'Q027',domain:'依恋发展',type:'k',text:'「让婴儿哭到自己停下来」这种方式是否有科学依据？',opts:['有，这是经过临床验证的睡眠训练方法，帮助婴儿建立自我安抚能力','有一定道理，6个月以上的婴儿可以开始这样训练，更小的不适合','没有，已被研究证明会损害婴儿安全感和神经系统发育','效果因人而异，如果孩子哭一会儿就能停，说明适合这个孩子'],correct:2,exp:'「哭声免疫法」由行为主义心理学家John Watson在1920年代提出。后来的神经科学研究发现，持续不被回应的婴儿，体内皮质醇（压力激素）会长期维持在高水平，而慢性高皮质醇会直接损伤海马体——大脑中负责记忆和情绪调节的核心区域。婴儿最终停止哭泣，不是因为学会了自我安抚，而是进入了「习得性无助」状态，放弃了求助。这是Bessel van der Kolk在《The Body Keeps the Score》中详细阐述的早期创伤机制之一。',src:{label:'van der Kolk《The Body Keeps the Score》',url:'https://www.douban.com/book/subject/26436103/'}},
+  {id:'Q028',domain:'依恋发展',type:'k',text:'孩子同时由多个照料者轮流照顾（如父母加祖辈），对婴儿有什么影响？',opts:['多个照料者能让婴儿接触不同的互动方式，促进社会化发展','只要每个照料者都有爱心、照顾质量好，谁带都一样','照料者不稳定会影响安全依恋的形成，主要照料者应保持稳定','6个月以内影响大，6个月以后婴儿适应能力增强，换照料者影响不大'],correct:2,exp:'婴儿建立安全依恋的方式，是反复体验「我发出信号→这个特定的人回应我」的循环。当照料者频繁更换，婴儿无法预测谁会来回应，这个学习过程就被打断。这不意味着孩子只能由一个人带——多个照料者都可以参与，但需要有一个相对固定的核心照料者。Bowlby把这称为「主要依恋对象」（primary attachment figure），这个角色可以是母亲、父亲或任何稳定参与照料的人。',src:{label:'Bowlby《依恋与失落》第一卷',url:'https://www.douban.com/book/subject/25982268/'}},
+  {id:'Q030',domain:'依恋发展',type:'k',text:'婴儿6-8个月开始「认生」，见到陌生人就哭，家长应该怎么处理？',opts:['多带孩子接触陌生人，克服认生，否则孩子长大会内向胆小','让陌生人慢慢接近，给婴儿适应时间，不要强迫互动','认生说明孩子平时接触的人太少，需要增加社交刺激','认生是分离焦虑的表现，说明孩子对照料者过度依赖，需要适当分离训练'],correct:1,exp:'陌生人焦虑（认生）出现在6-8个月，是婴儿开始区分「熟悉的人」和「陌生人」的认知发展里程碑。Ainsworth的研究显示，出现认生反应的婴儿，往往是已经建立了安全依恋的孩子——因为他们已经有了「熟悉」的参照对象，才能识别出「陌生」。强迫婴儿与陌生人互动只会加剧焦虑，正确做法是让陌生人保持距离，给婴儿足够的观察和适应时间。',src:{label:'Ainsworth陌生情境实验（1978）· 发展心理学教材',url:'https://pubmed.ncbi.nlm.nih.gov/'}},
+  {id:'Q019',domain:'新生儿护理',type:'k',text:'给新生儿洗澡，水温应该怎么判断？',opts:['用手肘内侧测试，感觉温热不烫就合适，这是最方便的传统方法','水温和体温接近（36-37℃）最好，比体温高会让婴儿不舒适','用婴儿温度计测量，保持37-38℃，不依赖主观感觉','冬天38-40℃防止婴儿着凉，夏天35-36℃避免过热'],correct:2,exp:'新生儿皮肤的角质层只有成人的五分之一厚，散热能力和温度感知与成人完全不同。手肘内侧虽然比手背敏感，但仍然是主观感觉，同一盆水不同人测会得出不同结论。37-38℃是经过测量验证的安全范围。冬天需要关注的是浴室室温（保持26-28℃），而不是把水温调高来补偿室温不足。',src:{label:'中华护理学会儿科护理专业委员会操作规范',url:'https://www.cna-cast.org.cn/'}},
+  {id:'Q021',domain:'新生儿护理',type:'k',text:'新生儿睡觉时应该采取什么姿势？',opts:['侧卧，防止溢奶时呛到气管，比仰卧更安全','趴睡，有助于头型发育，也能减少肠胀气不适','仰卧，在没有枕头的硬床垫上，是预防婴儿猝死综合征的关键措施','和大人同床睡，大人能及时感知婴儿状态，出现问题可以立刻处理'],correct:2,exp:'婴儿猝死综合征（SIDS）是1岁以内婴儿非疾病死亡的首要原因，仰卧睡眠可将SIDS风险降低50%以上。美国儿科学会自1992年推行「Back to Sleep」运动后，美国婴儿SIDS死亡率下降了超过50%。侧卧容易翻转为俯卧，同样有风险。和大人同床睡反而增加窒息风险。溢奶呛到的风险远低于趴睡窒息，而且仰卧时婴儿的气道解剖结构本身就能防止呛奶。',src:{label:'美国儿科学会（AAP）《婴儿安全睡眠政策声明》2022',url:'https://publications.aap.org/pediatrics/article/150/1/e2022057990/188348'}},
+  {id:'Q022',domain:'新生儿护理',type:'k',text:'3个月以内的新生儿发烧（超过38℃），应该怎么处理？',opts:['先物理降温（温水擦浴），观察2小时，不退烧再去医院','给婴儿专用退烧药，控制体温后第二天看儿科门诊','立即去急诊，3个月内婴儿发烧是儿科急症，不能在家等待','多喂奶补充水分，发烧是免疫系统在工作，适当观察即可'],correct:2,exp:'3个月以内的婴儿免疫系统极不成熟，发烧可能是败血症或细菌性脑膜炎的唯一外在表现，而这两种感染在没有静脉抗生素治疗的情况下，可以在数小时内造成永久性损伤甚至死亡。美国儿科学会和中华医学会儿科学分会的指南都明确：3个月以下婴儿体温超过38℃，必须当日就诊急诊。「多观察」的逻辑在大孩子身上成立，在新生儿身上是危险的。3个月以下婴儿禁止使用退烧药。',src:{label:'中华医学会儿科学分会《儿童发热处理指南》',url:'https://www.cma.org.cn/'}},
+  {id:'Q009',domain:'家庭关系',type:'a',text:'产后第一个月，当你需要休息时，通常是谁来照顾孩子？',opts:['基本靠自己，撑着也要顾着孩子','和伴侣协商，他来接手让我休息','家里长辈主动帮忙，我可以睡觉','请了月嫂，有专业人来负责','还没到这个阶段'],exp:'产后6周内，母亲体内雌激素和孕激素急剧下降，叠加睡眠剥夺和照料压力，是产后抑郁发生的高峰期。得不到充分休息的母亲，发生产后抑郁的概率是有支持情况的3倍。产后抑郁不是情绪软弱，是生理和心理双重压力下可预测的结果。伴侣在这个阶段主动接手，不只是帮忙，而是在保护这个家庭最核心的运转基础。',src:{label:'中华医学会《产后抑郁障碍防治指南》2022',url:'https://www.cma.org.cn/'}},
+  {id:'Q036',domain:'家庭关系',type:'a',text:'过去一个月，孩子生病需要请假照顾时，通常是谁请假？',opts:['都是我请假，这件事默认归我','我和伴侣商量着来，轮流请假','伴侣主动请假，不需要我开口','两边老人来帮忙，我们都不用请假','还没遇到过这种情况'],exp:'家庭分工有一个自我强化的机制——谁做得多，谁就越来越被默认为负责人；另一方因为缺少练习，能力和信心都在下降，逐渐退出。孩子生病请假这件事，表面上是一个临时安排，实际上是家庭育儿默认分工的一面镜子。「他不是不愿意，是真的不会」——但不会的原因，往往是一直没有机会练习。',src:{label:'Arlie Hochschild《第二轮班》· 家庭社会学研究文献',url:'https://www.douban.com/book/subject/1027113/'}},
+  {id:'Q040',domain:'家庭关系',type:'a',text:'如果你因为育儿感到疲惫或委屈，你通常会告诉伴侣吗？',opts:['会主动说，我们之间沟通很顺畅','有时候说，但不会把全部感受都说出来','很少说，担心对方也很累不想增加负担','基本不说，说了对方也理解不了或改变不了','还没到这个阶段'],exp:'婴儿对照料者的情绪状态有极高的敏感性——母亲长期处于压抑和疲惫中，即使表面上正常照料，婴儿也会通过面部表情、声调、肢体接触的微小变化感受到。Daniel Stern的母婴互动研究显示，照料者的情绪可调节性，直接影响婴儿情绪调节能力的发展。不说出来，不只是对自己的消耗，也在悄悄影响孩子。',src:{label:'Daniel Stern《婴儿的人际世界》· 产后心理健康文献',url:'https://www.douban.com/book/subject/26276121/'}}
+];
+
+const DOMAINS = ['哺乳','孕期决策','依恋发展','新生儿护理','家庭关系'];
+const DOMAIN_EMOJI = {'哺乳':'🤱','孕期决策':'🏥','依恋发展':'💚','新生儿护理':'👶','家庭关系':'🏠'};
+
+const SPECS = [
+  {id:'nursing',label:'哺乳专项',desc:'10道题，深入了解哺乳知识',icon:'🤱',color:'g',open:true,domain:'哺乳'},
+  {id:'pregnancy',label:'孕期决策专项',desc:'8道题，关键孕期检查与决策',icon:'🏥',color:'y',open:true,domain:'孕期决策'},
+  {id:'attachment',label:'依恋发展专项',desc:'即将上线',icon:'💚',color:'g',open:false,domain:'依恋发展'},
+  {id:'newborn',label:'新生儿护理专项',desc:'即将上线',icon:'👶',color:'c',open:false,domain:'新生儿护理'},
+  {id:'family',label:'家庭关系专项',desc:'即将上线',icon:'🏠',color:'g',open:false,domain:'家庭关系'},
+];
+
+// ══════════════════
+// STATE
+// ══════════════════
+let S = {
+  identity:null, age:null,
+  qi:0, answers:[], saved:[],
+  scores:{},
+  specMode:false, specDomain:null, specQi:0, specAnswers:[]
+};
+DOMAINS.forEach(d => S.scores[d]={c:0,t:0});
+
+// ══════════════════
+// NAV
+// ══════════════════
+function go(id) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function scrollTo(id) {
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('on');
+  setTimeout(()=>t.classList.remove('on'), 2000);
+}
+
+// ══════════════════
+// IDENTITY
+// ══════════════════
+function pickId(id, el) {
+  S.identity = id;
+  document.querySelectorAll('.id-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  const aw = document.getElementById('age-wrap');
+  if (id==='parent') { aw.classList.add('show'); }
+  else { aw.classList.remove('show'); S.age=id; checkReady(); }
+}
+
+function pickAge(age, el) {
+  S.age = age;
+  document.querySelectorAll('.age-btn').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');
+  checkReady();
+}
+
+function checkReady() {
+  const btn = document.getElementById('btn-go');
+  if (S.identity && S.age) btn.classList.add('ready');
+}
+
+// ══════════════════
+// QUIZ
+// ══════════════════
+function startQuiz() {
+  S.qi=0; S.answers=[]; S.saved=[];
+  DOMAINS.forEach(d=>S.scores[d]={c:0,t:0});
+  go('quiz');
+  renderQ();
+}
+
+function renderQ() {
+  const q = QS[S.qi];
+  const total = QS.length;
+  document.getElementById('q-num').textContent = `${S.qi+1} / ${total}`;
+  document.getElementById('prog-bar').style.width = (S.qi/total*100)+'%';
+  document.getElementById('btn-next').classList.remove('show');
+  document.getElementById('btn-next').textContent = S.qi<total-1 ? '下一题 →' : '查看报告 →';
+
+  const isK = q.type==='k';
+  const lbls = ['A','B','C','D','E'];
+
+  let optsHTML = isK
+    ? `<div class="opts">${q.opts.map((o,i)=>`<button class="opt" onclick="pickOpt(${i})" id="opt-${i}"><span class="opt-ltr">${lbls[i]}</span><span>${o}</span></button>`).join('')}</div>`
+    : `<div class="aw-opts">${q.opts.map((o,i)=>`<button class="aw-opt" onclick="pickAw(${i})" id="aw-${i}">${o}</button>`).join('')}</div>`;
+
+  document.getElementById('q-root').innerHTML = `
+    <div class="q-anim">
+      <div class="q-meta">
+        <span class="q-badge ${isK?'k':'a'}">${isK?'📚 知识型':'💭 觉察型'}</span>
+        <span class="q-tag">${q.domain}</span>
+      </div>
+      <div class="q-text">${q.text}</div>
+      ${optsHTML}
+      <div class="result-box" id="result-box"></div>
+    </div>`;
+
+  document.getElementById('quiz-body').scrollTo(0,0);
+}
+
+function pickOpt(idx) {
+  const q = QS[S.qi];
+  const ok = idx===q.correct;
+  S.scores[q.domain].t++;
+  if(ok) S.scores[q.domain].c++;
+  S.answers.push({qid:q.id,sel:idx,ok,type:'k',domain:q.domain});
+  const lbls=['A','B','C','D'];
+  q.opts.forEach((_,i)=>{
+    const el=document.getElementById('opt-'+i);
+    el.disabled=true;
+    if(i===q.correct) el.classList.add('correct');
+    else if(i===idx&&!ok) el.classList.add('wrong');
+    else el.classList.add('dim');
+  });
+  showResult(ok?'ok':'err', q);
+}
+
+function pickAw(idx) {
+  const q = QS[S.qi];
+  S.answers.push({qid:q.id,sel:idx,type:'a',domain:q.domain});
+  q.opts.forEach((_,i)=>{
+    const el=document.getElementById('aw-'+i);
+    el.disabled=true;
+    if(i===idx) el.classList.add('picked');
+  });
+  showResult('aw', q);
+}
+
+function showResult(type, q) {
+  const isSaved = S.saved.some(s=>s.qid===q.id);
+  const labels = {ok:'✓ 回答正确', err:'这是一个常见误区', aw:'感谢你的真实回答'};
+  const box = document.getElementById('result-box');
+  box.innerHTML = `
+    <div class="result-top ${type}">
+      <span class="result-dot">${type==='ok'?'✓':type==='err'?'!':'◎'}</span>
+      ${labels[type]}
+    </div>
+    <div class="result-body">
+      <div class="result-exp">${q.exp}</div>
+      <div class="result-actions">
+        <a class="act-btn" href="${q.src.url}" target="_blank" rel="noopener">📄 ${q.src.label}</a>
+        <button class="act-btn ${isSaved?'saved':''}" id="save-${q.id}" onclick="toggleSave('${q.id}')">
+          ${isSaved?'⭐ 已收藏':'☆ 收藏'}
+        </button>
+        <button class="act-btn" id="shr-${q.id}" onclick="shareQ('${q.id}')">↗ 分享</button>
+      </div>
+    </div>`;
+  box.classList.add('show');
+  document.getElementById('btn-next').classList.add('show');
+  setTimeout(()=>box.scrollIntoView({behavior:'smooth',block:'nearest'}),120);
+}
+
+function toggleSave(qid) {
+  const q = QS.find(q=>q.id===qid);
+  const idx = S.saved.findIndex(s=>s.qid===qid);
+  const btn = document.getElementById('save-'+qid);
+  if(idx===-1){
+    S.saved.push({qid,text:q.text,exp:q.exp,src:q.src});
+    if(btn){btn.textContent='⭐ 已收藏';btn.classList.add('saved');}
+    toast('已收藏，报告页可查看');
+  } else {
+    S.saved.splice(idx,1);
+    if(btn){btn.textContent='☆ 收藏';btn.classList.remove('saved');}
+    toast('已取消收藏');
+  }
+}
+
+function shareQ(qid) {
+  const q = QS.find(q=>q.id===qid);
+  const text = `【育儿认知】${q.text}\n\n${q.exp.slice(0,100)}……\n\n来源：${q.src.label}\n\n—— 育儿认知测评（公益项目）`;
+  const btn = document.getElementById('shr-'+qid);
+  if(navigator.share){ navigator.share({title:'育儿认知',text}); }
+  else {
+    navigator.clipboard?.writeText(text).then(()=>{
+      if(btn){btn.textContent='✓ 已复制';btn.classList.add('copied');}
+      toast('内容已复制，可直接粘贴分享');
+      setTimeout(()=>{if(btn){btn.textContent='↗ 分享';btn.classList.remove('copied');}},2500);
+    });
+  }
+}
+
+function nextQ() {
+  S.qi++;
+  if(S.qi>=QS.length) go('consent');
+  else renderQ();
+}
+
+// ══════════════════
+// CONSENT
+// ══════════════════
+function consent(agreed) {
+  S.consent = agreed;
+  buildReport();
+  go('report');
+  animReport();
+}
+
+// ══════════════════
+// RADAR SVG
+// ══════════════════
+function drawRadar(svgId, scores, size) {
+  const svg = document.getElementById(svgId);
+  if(!svg) return;
+  const cx=size/2, cy=size/2;
+  const R=size*0.38, labelR=size*0.48;
+  const n=DOMAINS.length;
+  const angles = DOMAINS.map((_,i) => (i/n)*Math.PI*2 - Math.PI/2);
+
+  let html='';
+
+  // Grid rings
+  [0.25,0.5,0.75,1].forEach(r=>{
+    const pts = angles.map(a=>`${cx+R*r*Math.cos(a)},${cy+R*r*Math.sin(a)}`).join(' ');
+    html+=`<polygon points="${pts}" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>`;
+  });
+
+  // Axes
+  angles.forEach(a=>{
+    html+=`<line x1="${cx}" y1="${cy}" x2="${cx+R*Math.cos(a)}" y2="${cy+R*Math.sin(a)}" stroke="rgba(255,255,255,0.2)" stroke-width="0.8"/>`;
+  });
+
+  // Data polygon
+  const pts = DOMAINS.map((d,i)=>{
+    const s=scores[d]||{c:0,t:1};
+    const pct=s.t>0?s.c/s.t:0;
+    const r=R*(0.15+pct*0.85);
+    return `${cx+r*Math.cos(angles[i])},${cy+r*Math.sin(angles[i])}`;
+  }).join(' ');
+
+  html+=`<polygon points="${pts}" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.8)" stroke-width="1.5"/>`;
+
+  // Dots
+  DOMAINS.forEach((d,i)=>{
+    const s=scores[d]||{c:0,t:1};
+    const pct=s.t>0?s.c/s.t:0;
+    const r=R*(0.15+pct*0.85);
+    html+=`<circle cx="${cx+r*Math.cos(angles[i])}" cy="${cy+r*Math.sin(angles[i])}" r="${size*0.022}" fill="#fff" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>`;
+  });
+
+  // Labels (only for large radar)
+  if(size>150){
+    DOMAINS.forEach((d,i)=>{
+      const lx=cx+labelR*Math.cos(angles[i]);
+      const ly=cy+labelR*Math.sin(angles[i]);
+      const anchor=lx<cx-5?'end':lx>cx+5?'start':'middle';
+      html+=`<text x="${lx}" y="${ly}" text-anchor="${anchor}" dominant-baseline="middle" fill="rgba(255,255,255,0.8)" font-size="${size*0.056}" font-family="Noto Sans SC,sans-serif">${DOMAIN_EMOJI[d]} ${d}</text>`;
+    });
+  }
+
+  svg.innerHTML=html;
+}
+
+// ══════════════════
+// REPORT
+// ══════════════════
+function buildReport() {
+  const kA = S.answers.filter(a=>a.type==='k');
+  const correct = kA.filter(a=>a.ok).length;
+  const total = kA.length;
+  const pct = total>0 ? Math.round(correct/total*100) : 0;
+
+  // Grade
+  let grade, desc;
+  if(pct>=80){grade='掌握扎实';desc='你已经建立了良好的科学育儿认知基础。继续探索，还有更多值得深入的领域。';}
+  else if(pct>=60){grade='有所积累';desc='你有不少积累，也发现了一些值得关注的盲区。了解这些，是给孩子最好的准备。';}
+  else if(pct>=40){grade='持续探索';desc='你发现了不少还不知道的事，这正是这个测评的意义——看见盲区，才能弥补。';}
+  else{grade='开始了解';desc='你发现了很多值得深入了解的知识。每一道答错的题，都是一个保护孩子的机会。';}
+
+  document.getElementById('r-grade').textContent = grade;
+  document.getElementById('r-desc').textContent = desc;
+
+  // Domain grid
+  document.getElementById('domain-grid').innerHTML = DOMAINS.map(d=>{
+    const s=S.scores[d];
+    if(!s||s.t===0) return '';
+    const p=Math.round(s.c/s.t*100);
+    const cls=p>=75?'good':p>=50?'mid':'low';
+    const label=p>=75?'掌握较好':p>=50?'有待深入':'值得关注';
+    return `<div class="domain-card">
+      <div class="dc-top">
+        <span class="dc-name">${DOMAIN_EMOJI[d]} ${d}</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="dc-grade grade-${cls}">${label}</span>
+          <span class="dc-score">${s.c}/${s.t}</span>
+        </div>
+      </div>
+      <div class="dc-track"><div class="dc-fill fill-${cls}" id="bar-${d}" style="width:0%"></div></div>
+    </div>`;
+  }).join('');
+
+  // Review
+  document.getElementById('review-list').innerHTML = S.answers.map(a=>{
+    const q=QS.find(q=>q.id===a.qid);
+    if(!q) return '';
+    const isA=a.type==='a';
+    const cls=isA?'aw':a.ok?'ok':'err';
+    const badge=isA?'觉察':a.ok?'正确':'误区';
+    const bcls=isA?'rb-aw':a.ok?'rb-ok':'rb-err';
+    const isSaved=S.saved.some(s=>s.qid===q.id);
+    return `<div class="review-item">
+      <div class="review-head">
+        <span class="review-dot dot-${cls}"></span>
+        <span class="review-q">${q.text}</span>
+        <span class="review-badge ${bcls}">${badge}</span>
+      </div>
+      ${(!isA&&!a.ok)||isA?`<div class="review-detail">
+        <div class="review-exp">${q.exp}</div>
+        <div class="review-actions">
+          <a class="act-btn" href="${q.src.url}" target="_blank" rel="noopener">📄 来源</a>
+          <button class="act-btn ${isSaved?'saved':''}" id="rsave-${q.id}" onclick="toggleSave('${q.id}')">
+            ${isSaved?'⭐ 已收藏':'☆ 收藏'}
+          </button>
+        </div>
+      </div>`:''}
+    </div>`;
+  }).join('');
+
+  // Mirror
+  document.getElementById('mirror-text').textContent = buildMirror(S.answers.filter(a=>a.type==='a'));
+
+  // Specs
+  const weakDomains = DOMAINS.filter(d=>S.scores[d]&&S.scores[d].t>0)
+    .sort((a,b)=>S.scores[a].c/S.scores[a].t-S.scores[b].c/S.scores[b].t);
+
+  document.getElementById('spec-cards').innerHTML = SPECS.map(sp=>{
+    const isWeak = weakDomains.slice(0,2).includes(sp.domain);
+    const rec = isWeak&&sp.open ? '⚡ 推荐深入' : '';
+    return `<div class="spec-card ${sp.open?'open':'coming'}" ${sp.open?`onclick="startSpec('${sp.id}')"`:''}">
+      <div class="spec-icon ${sp.color}">${sp.icon}</div>
+      <div class="spec-info">
+        <strong>${sp.label} ${rec?`<span style="font-size:10px;color:var(--coral);font-weight:400">${rec}</span>`:''}</strong>
+        <span>${sp.desc}</span>
+      </div>
+      <span class="spec-badge ${sp.open?'sb-open':'sb-soon'}">${sp.open?'可进入':'即将上线'}</span>
+    </div>`;
+  }).join('');
+
+  // Saved
+  const savedEl = document.getElementById('saved-wrap');
+  if(S.saved.length===0){
+    savedEl.innerHTML='<div class="saved-empty">答题过程中点击「收藏」可以把重要内容保存在这里</div>';
+  } else {
+    savedEl.innerHTML=`<div class="saved-list">${S.saved.map(s=>`
+      <div class="saved-item">
+        <div class="saved-q">${s.text}</div>
+        <div class="saved-exp">${s.exp.slice(0,120)}…</div>
+      </div>`).join('')}</div>`;
+  }
+
+  // Share card data
+  document.getElementById('card-score').textContent = `${correct} / ${total} 知识题正确`;
+  document.getElementById('card-grade').textContent = grade;
+  document.getElementById('card-mirror').textContent = buildMirror(S.answers.filter(a=>a.type==='a'));
+}
+
+function buildMirror(aw) {
+  if(!aw.length) return '你完成了全部知识型题目，这份报告反映了你目前对育儿知识的掌握情况。';
+  const parts=[];
+  const a009=aw.find(a=>a.qid==='Q009');
+  const a036=aw.find(a=>a.qid==='Q036');
+  const a040=aw.find(a=>a.qid==='Q040');
+  if(a009){
+    if(a009.sel===0) parts.push('产后主要由自己独立承担照料');
+    else if(a009.sel===1) parts.push('产后与伴侣共同分担照料');
+    else if(a009.sel===2) parts.push('产后有长辈在旁协助');
+  }
+  if(a036){
+    if(a036.sel===0) parts.push('孩子生病时默认由自己来负责');
+    else if(a036.sel===1) parts.push('孩子生病时与伴侣轮流承担');
+    else if(a036.sel===2) parts.push('伴侣会主动承担孩子生病时的照料');
+  }
+  if(a040){
+    if(a040.sel>=2) parts.push('育儿的疲惫和委屈更多是自己承受');
+    else if(a040.sel===0) parts.push('能够和伴侣顺畅地沟通育儿感受');
+  }
+  return parts.length ? parts.join('，')+'。' : '你认真完成了所有题目，这份报告是你育儿认知的一次诚实记录。';
+}
+
+function animReport() {
+  setTimeout(()=>{
+    drawRadar('radar-svg', S.scores, 220);
+    drawRadar('card-radar', S.scores, 140);
+    DOMAINS.forEach(d=>{
+      const s=S.scores[d];
+      if(!s||s.t===0) return;
+      const bar=document.getElementById('bar-'+d);
+      if(bar) bar.style.width=Math.round(s.c/s.t*100)+'%';
+    });
+  },300);
+}
+
+// ══════════════════
+// SPECIALTY
+// ══════════════════
+const SPEC_QS = {
+  nursing: ['Q001','Q002','Q003','Q004','Q007','Q010'],
+  pregnancy: ['Q011','Q012','Q014','Q016']
+};
+
+function startSpec(specId) {
+  const spec = SPECS.find(s=>s.id===specId);
+  S.specMode=true; S.specId=specId; S.specQi=0; S.specAnswers=[];
+  document.getElementById('spec-title').textContent = spec.label;
+  document.getElementById('spec-subtitle').textContent = spec.desc;
+  go('spec');
+  renderSpecQ();
+}
+
+function renderSpecQ() {
+  const specId = S.specId;
+  const qids = SPEC_QS[specId]||[];
+  const qi = S.specQi;
+  const q = QS.find(q=>q.id===qids[qi]);
+  if(!q) return;
+
+  const btn = document.getElementById('spec-btn-next');
+  btn.classList.remove('show');
+  btn.textContent = qi<qids.length-1 ? '下一题 →' : '完成专项，合并报告 →';
+
+  const isK=q.type==='k';
+  const lbls=['A','B','C','D','E'];
+
+  let optsHTML = isK
+    ? `<div class="opts">${q.opts.map((o,i)=>`<button class="opt" onclick="pickSpecOpt(${i})" id="sopt-${i}"><span class="opt-ltr">${lbls[i]}</span><span>${o}</span></button>`).join('')}</div>`
+    : `<div class="aw-opts">${q.opts.map((o,i)=>`<button class="aw-opt" onclick="pickSpecAw(${i})" id="saw-${i}">${o}</button>`).join('')}</div>`;
+
+  document.getElementById('spec-q-root').innerHTML=`
+    <div class="q-anim" style="margin-bottom:8px">
+      <div style="font-size:11px;color:var(--gray);margin-bottom:12px">${qi+1} / ${qids.length}</div>
+      <div class="q-meta">
+        <span class="q-badge ${isK?'k':'a'}">${isK?'📚 知识型':'💭 觉察型'}</span>
+        <span class="q-tag">${q.domain}</span>
+      </div>
+      <div class="q-text">${q.text}</div>
+      ${optsHTML}
+      <div class="result-box" id="spec-result-box"></div>
+    </div>`;
+
+  document.getElementById('spec-body').scrollTo(0,0);
+}
+
+function pickSpecOpt(idx) {
+  const qids=SPEC_QS[S.specId]||[];
+  const q=QS.find(q=>q.id===qids[S.specQi]);
+  const ok=idx===q.correct;
+  S.specAnswers.push({qid:q.id,sel:idx,ok,type:'k',domain:q.domain});
+  q.opts.forEach((_,i)=>{
+    const el=document.getElementById('sopt-'+i);
+    el.disabled=true;
+    if(i===q.correct) el.classList.add('correct');
+    else if(i===idx&&!ok) el.classList.add('wrong');
+    else el.classList.add('dim');
+  });
+  showSpecResult(ok?'ok':'err',q);
+}
+
+function pickSpecAw(idx) {
+  const qids=SPEC_QS[S.specId]||[];
+  const q=QS.find(q=>q.id===qids[S.specQi]);
+  S.specAnswers.push({qid:q.id,sel:idx,type:'a',domain:q.domain});
+  q.opts.forEach((_,i)=>{
+    const el=document.getElementById('saw-'+i);
+    el.disabled=true;
+    if(i===idx) el.classList.add('picked');
+  });
+  showSpecResult('aw',q);
+}
+
+function showSpecResult(type,q) {
+  const labels={ok:'✓ 回答正确',err:'这是一个常见误区',aw:'感谢你的真实回答'};
+  const box=document.getElementById('spec-result-box');
+  box.innerHTML=`
+    <div class="result-top ${type}">
+      <span class="result-dot">${type==='ok'?'✓':type==='err'?'!':'◎'}</span>
+      ${labels[type]}
+    </div>
+    <div class="result-body">
+      <div class="result-exp">${q.exp}</div>
+      <div class="result-actions">
+        <a class="act-btn" href="${q.src.url}" target="_blank" rel="noopener">📄 ${q.src.label}</a>
+        <button class="act-btn" onclick="toggleSave('${q.id}')">☆ 收藏</button>
+      </div>
+    </div>`;
+  box.classList.add('show');
+  document.getElementById('spec-btn-next').classList.add('show');
+  setTimeout(()=>box.scrollIntoView({behavior:'smooth',block:'nearest'}),120);
+}
+
+function nextSpecQ() {
+  const qids=SPEC_QS[S.specId]||[];
+  S.specQi++;
+  if(S.specQi>=qids.length){
+    mergeSpecResults();
+  } else {
+    renderSpecQ();
+  }
+}
+
+function mergeSpecResults() {
+  // Merge spec answers into main scores
+  S.specAnswers.forEach(a=>{
+    // avoid double counting if already in S.answers
+    const already=S.answers.find(x=>x.qid===a.qid);
+    if(!already){
+      S.answers.push(a);
+      if(a.type==='k'&&a.domain){
+        if(!S.scores[a.domain]) S.scores[a.domain]={c:0,t:0};
+        S.scores[a.domain].t++;
+        if(a.ok) S.scores[a.domain].c++;
+      }
+    }
+  });
+  // Rebuild report and go back
+  buildReport();
+  go('report');
+  animReport();
+  toast('专项结果已合并到你的报告 ✓');
+}
+
+// ══════════════════
+// SHARE
+// ══════════════════
+function doShare(type) {
+  const msg = type==='partner'
+    ? '我刚完成了一个育儿认知测评，关于孩子的成长有些事我想让你也了解一下。'
+    : type==='family'
+    ? '一起来了解科学育儿知识，帮助孩子更好地成长。'
+    : '我的育儿认知测评报告，来看看你的育儿认知怎么样？';
+  if(navigator.share) navigator.share({title:'育儿认知测评',text:msg,url:location.href});
+  else { navigator.clipboard?.writeText(location.href); toast('链接已复制'); }
+}
+
+function restart() {
+  S.qi=0; S.answers=[]; S.saved=[];
+  DOMAINS.forEach(d=>S.scores[d]={c:0,t:0});
+  go('quiz');
+  renderQ();
+}
+
+// Draw card radar on sharecard screen load
+document.getElementById('screen-sharecard').addEventListener('transitionend',()=>{
+  drawRadar('card-radar',S.scores,140);
+});
+</script>
+</body>
+</html>
